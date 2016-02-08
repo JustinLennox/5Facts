@@ -1,0 +1,22 @@
+*{
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+#banner{
+    background-color: #3498db;
+    font-size: 30pt;
+    color: white;
+    padding: 0px;
+    background-size: 100%, 100%;
+    margin: 0px;
+    text-align: center;
+    font-weight: 200;
+    height: 50px;
+    width: 100%;
+}
+
+body{
+    margin: 0;
+    padding: 0
+    background-color: #f5f8fa;
+}
