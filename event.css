@@ -29,21 +29,28 @@
 #SearchForm{
     background-color: white;
     margin: auto;
+    position: relative;
     height: 60px;
     width: 100%;
 
 }
 
 #SearchBar {
+    position: absolute;
     display: block;
     border-style: none;
     background-color: #E8ECF0;
     font-size: 12pt;
     margin: auto;
     width: 90%;
-    height: 90%;
-    padding: 0px 10px 0px 10px;
+    height: 40px;
+    top: 10px;
+    left: 5%;
     border-radius: 5px;
+    background-image:url(5FactsSearchIcon.png); 
+    background-repeat: no-repeat; 
+    background-position: 5px 6.5px;
+    background-size: 30px 30px;
 }
 
 #tagline{
