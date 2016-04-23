@@ -26,6 +26,22 @@
     font-weight: 200;
 }
 
+#login , #logout{
+    float: right;
+    font-size: 15pt;
+    text-align: right;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
+h2{
+    margin-left: 20px;
+}
+
+.signin{
+    margin-left: 20px;
+}
+
 #SearchForm{
     background-color: white;
     margin: auto;
