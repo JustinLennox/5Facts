@@ -34,7 +34,7 @@
     margin-top: 10px;
 }
 
-h2{
+h3{
     margin-left: 20px;
 }
 
@@ -85,10 +85,4 @@ body{
     margin: 0;
     padding: 0;
     background-color: #F2F6F9;
-}
-
-table {
-    font-size: 30pt;
-	margin-left: 5%;
-	margin-top:30px;
 }
