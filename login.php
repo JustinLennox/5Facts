@@ -90,8 +90,7 @@
             ?>" method = "post">
             <h4 class = "form-signin-heading"><?php echo $msg; ?></h4>
             <input type = "text" class = "form-control" 
-               name = "newusername" placeholder = "username" 
-               required autofocus></br>
+               name = "newusername" placeholder = "username" ></br>
             <input type = "password" class = "form-control"
                name = "newpassword" placeholder = "password" required>
             <button class = "btn btn-lg btn-primary btn-block" type = "submit" 

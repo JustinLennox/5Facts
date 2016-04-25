@@ -9,8 +9,8 @@
 
 
 		<div id="header">
-			<div id="login"> <a href="login.php">Login/Register</a></div>
-			<div id="logout"> <a href="logout.php">Logout</a></div>
+			<div id="login"> <a href="login.php" style="text-decoration: none;">Login/Register</a></div>
+			<div id="logout"> <a href="logout.php" style="text-decoration: none;">Logout</a></div>
 			<img src='5FactsLogo.png' height='50px' width='50px'/>
         	<div id="headline"> FiveFacts </div>
         	<div id="tagline">Get the scoop on current events quick.</div>
@@ -24,6 +24,7 @@
 		if(isset($_SESSION['valid']))
 		{
 			echo "Currently logged in as " . $_SESSION['username'];
+			echo "<br>" . "Submit a new event " . "<a href='createEvent.php'>here</a>";
 		}
 		?>
 		
