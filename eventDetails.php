@@ -45,11 +45,99 @@
 			$variable->execute();
 
 			//output results table
-			echo "<table> <tr><td><b>". htmlspecialchars($_POST["eventID"]) . "</b></td></tr>";
+			echo "<table> <tr><td></td><td><b>". htmlspecialchars($_POST["eventID"]) . "</b></td><td><b>Vote Count: </b></td></tr>";
 				
 			$count = 1;
 			while($table = $variable->fetch( PDO::FETCH_ASSOC )){ 
-				echo "<tr><td>" . $table['factOne'] . "</td></tr>" . "<tr><td>" . $table['factTwo'] . "</td></tr>" . "<tr><td>" . $table['factThree'] . "</td></tr>" . "<tr><td>" . $table['factFour'] . "</td></tr>" . "<tr><td>" . $table['factFive'] . "</td></tr>" ;
+				
+				//initialize vote variables
+				$vote1 = $table['vote1'];
+				$vote2 = $table['vote2'];
+				$vote3 = $table['vote3'];
+				$vote4 = $table['vote4'];
+				$vote5 = $table['vote5'];
+				
+				//initialize fact variables
+				$factOne = $table['factOne'];
+				$factTwo = $table['factTwo'];
+				$factThree = $table['factThree'];
+				$factFour = $table['factFour'];
+				$factFive = $table['factFive'];
+				
+				//orders 
+				for($i=1; $i<6; $i++){
+					for($j=1; $j<6; $j++){
+						if($vote2 > $vote1){
+							$tempVote = $vote1;
+							$tempFact = $factOne;
+							
+							try {
+							    $sql = 'UPDATE Event SET factOne = \'' . $factTwo . '\', factTwo= \'' . $tempFact . '\', vote1= \'' . $vote2 . '\',vote2= \'' . $tempVote . '\'WHERE name = \'' . $event . '\'';
+							    $stmt = $conn->prepare($sql);
+							    $stmt->execute();
+							    }
+							catch(PDOException $e)
+							    {
+							    echo $sql . "<br>" . $e->getMessage();
+							    }
+						}
+						if($vote3 > $vote2){
+							$tempVote = $vote2;
+							$tempFact = $factTwo;
+							
+							try {
+							    $sql = 'UPDATE Event SET factTwo = \'' . $factThree . '\', factThree= \'' . $tempFact . '\', vote2= \'' . $vote3 . '\',vote3= \'' . $tempVote . '\'WHERE name = \'' . $event . '\'';
+							    $stmt = $conn->prepare($sql);
+							    $stmt->execute();
+							    }
+							catch(PDOException $e)
+							    {
+							    echo $sql . "<br>" . $e->getMessage();
+							    }
+						}
+						if($vote4 > $vote3){
+							$tempVote = $vote3;
+							$tempFact = $factThree;
+							
+							try {
+							    $sql = 'UPDATE Event SET factThree = \'' . $factFour . '\', factFour= \'' . $tempFact . '\', vote3= \'' . $vote4 . '\',vote4= \'' . $tempVote . '\'WHERE name = \'' . $event . '\'';
+							    $stmt = $conn->prepare($sql);
+							    $stmt->execute();
+							    }
+							catch(PDOException $e)
+							    {
+							    echo $sql . "<br>" . $e->getMessage();
+							    }
+						}
+						if($vote5 > $vote4){
+							$tempVote = $vote4;
+							$tempFact = $factFour;
+							
+							try {
+							    $sql = 'UPDATE Event SET factFour = \'' . $factFive . '\', factFive= \'' . $tempFact . '\', vote4= \'' . $vote5 . '\',vote5= \'' . $tempVote . '\'WHERE name = \'' . $event . '\'';
+							    $stmt = $conn->prepare($sql);
+							    $stmt->execute();
+							    }
+							catch(PDOException $e)
+							    {
+							    echo $sql . "<br>" . $e->getMessage();
+							    }
+						}
+					}
+				}
+			}
+			
+			$variable = $conn->prepare('SELECT * FROM Event WHERE name = \'' . $event . '\'');
+			$variable->execute();
+			$count = 1;
+			while($table = $variable->fetch( PDO::FETCH_ASSOC )){ 
+				
+				echo "<tr><td>Fact 1: </td><td>" . $factOne . "</td><td>" . $vote1 . "</td></tr>";
+				echo "<tr><td>Fact 2: </td><td>" . $factTwo . "</td><td>" . $vote2 . "</td></tr>";
+				echo "<tr><td>Fact 3: </td><td>" . $factThree . "</td><td>" . $vote3 . "</td></tr>";
+				echo "<tr><td>Fact 4: </td><td>" . $factFour . "</td><td>" . $vote4 . "</td></tr>";
+				echo "<tr><td>Fact 5: </td><td>" . $factFive . "</td><td>" . $vote5 . "</td></tr>";
+				echo "<tr><td>Additional Info: </td><td><a href=" . $table['linkOne'] . ">" . $table['linkOne'] ."</a></td><td></td></tr>";
  				$count++;
 			}	
 			echo "</table>";
