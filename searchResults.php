@@ -44,14 +44,17 @@
 			$variable->execute();
 
 			//output results table
-			echo "<table> <tr> <td><b>Events Related to: </b>". 
+			echo "<table> <tr> <td><b>Events related to search: </b>". 
 				htmlspecialchars($_POST["search"]) . "</td></tr>";
 				
 			$count = 1;
-			while($movieTable = $variable->fetch( PDO::FETCH_ASSOC )){ 
-				echo "<tr><td>" . $movieTable['name'] . "</td></tr></table>";
+			while($table = $variable->fetch( PDO::FETCH_ASSOC )){ 
+				$eventID = $table['name'];
+				echo "<tr><td>" . $table['name'] . "<form id='eventForm' action ='eventDetails.php' method='post'><input type='hidden' name='eventID' value='$eventID'/><input type='submit' value='Select'/></form></td></tr>";
+				
  				$count++;
 			}	
+			echo "</table>";
 			if($count == 1)
 			{
 				echo "No Results";	

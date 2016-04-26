@@ -56,13 +56,15 @@
 				echo $sql . "<br>" . $e->getMessage();
 			}
 			
-		
-	
-		if(isset($_SESSION['valid']))
-		{
-			echo "Currently logged in as " . $_SESSION['username'];
-		}
-		?>
-		
+			if(isset($_SESSION['valid']))
+			{
+				echo "Currently logged in as " . $_SESSION['username'];
+			}
+			
+			?>
+			
+	    <form id='HomeForm' action="index.php" method="post">
+	  		<input type="submit" value="Home" />
+		</form>
 	</body>
 </html>
