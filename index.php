@@ -16,8 +16,8 @@
         	<div id="tagline">Get the scoop on current events quick.</div>
     	</div>
 
-    	<form id='SearchForm'>
-  			<input id='SearchBar' type="text" name="firstname" placeholder='Search for something like GOP Debate or UGA G Day'  style='text-indent:40px;'/>
+    	<form id='SearchForm' action="searchResults.php" method="POST">
+  			<input id='SearchBar' type="text" name="search" placeholder='Search for something like GOP Debate or UGA G Day'  style='text-indent:40px;'/>
 		</form>
 
 		<?php 

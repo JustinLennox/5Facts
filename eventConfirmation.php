@@ -16,9 +16,7 @@
         	<div id="tagline">Get the scoop on current events quick.</div>
     	</div>
 
-    	<form id='SearchForm' action="searchResults.php" method="post">
-  			<input id='SearchBar' type="text" name="search" placeholder='Search for something like GOP Debate or UGA G Day'  style='text-indent:40px;'/>
-		</form>
+  
 
 		<?php 
 		 
@@ -40,21 +38,22 @@
     		  }
 		
 			//query
-			$variable = $conn->prepare("SELECT name FROM Event");
-			$variable->execute();
-
-			//output results table
-			echo "<table> <tr> <td><b>Events Related to: </b>". 
-				htmlspecialchars($_POST["search"]) . "</td></tr>";
+			try {
+				$name = htmlspecialchars($_POST["Name"]);
+				$factone = htmlspecialchars($_POST["Fact1"]);
+				$facttwo = htmlspecialchars($_POST["Fact2"]);
+				$factthree = htmlspecialchars($_POST["Fact3"]);
+				$factfour = htmlspecialchars($_POST["Fact4"]);
+				$factfive = htmlspecialchars($_POST["Fact5"]);
+				$userCreated = $_SESSION['username'];
+				$sql = "INSERT INTO Event (name, factOne, factTwo, factThree, factFour, factFive, userCreated) VALUES ('$name', '$factone', '$facttwo', '$factthree', '$factfour', '$factfive', '$userCreated')";
+				$conn->exec($sql);
 				
-			$count = 1;
-			while($movieTable = $variable->fetch( PDO::FETCH_ASSOC )){ 
-				echo "<tr><td>" . $movieTable['name'] . "</td></tr></table>";
- 				$count++;
-			}	
-			if($count == 1)
-			{
-				echo "No Results";	
+				echo "Event successfully created!";
+			}
+			
+			catch (PDOException $e){
+				echo $sql . "<br>" . $e->getMessage();
 			}
 			
 		

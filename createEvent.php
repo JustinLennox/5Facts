@@ -15,7 +15,7 @@
         	<div id="tagline">Get the scoop on current events quick.</div>
     	</div>
     	<div id="container">
-    		<form method="post">
+    		<form action= "eventConfirmation.php" method="post">
 				<fieldset>
 					<legend>Event Details</legend>
 						<input name="Name" type="text" placeholder="Name" autofocus="autofocus" /> 
