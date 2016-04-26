@@ -25,6 +25,24 @@
       <div id = "loginPost">
          
          <?php
+
+            //server details
+            $servername = "localhost";
+            $username = "root";
+            $password = "";
+
+            //connect to server
+            try {
+               $conn = new PDO("mysql:host=$servername;dbname=5facts", $username, $password);
+               //set the PDO error mode to exception
+               $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+               //echo "Connected successfully"; 
+            }
+            
+            catch(PDOException $e) {
+               echo "Connection failed: " . $e->getMessage();
+            }
+            
             //needs to redirect on correct login
             $msg = '';
             
@@ -33,7 +51,21 @@
 				
                //logic for querying sql goes here to authenticate
                //if username matches password
-               if ($_POST['username'] == 'thacker' && $_POST['password'] == 'pass') 
+               $username = htmlspecialchars($_POST['username']);
+               $variable = $conn->prepare('SELECT password FROM User WHERE userName =  \'' . $username . '\'');
+               $variable->execute();
+
+               $count = 1;
+               $dbPassword = "";
+            while($userList = $variable->fetch( PDO::FETCH_ASSOC )){ 
+               $dbPassword = $userList['password'];
+               $count++;
+            }  
+
+            if(isset($variable))
+            {
+               $count = 0;
+               if ($_POST['password'] == $dbPassword) 
                {
                   //set session to true
                   $_SESSION['valid'] = True;
@@ -43,27 +75,34 @@
                   header("location: index.php");
                   exit();
                }
-               else {
+               else
+               {
                   echo "Incorrect username or password";
                }
             }
+         }
             
             if (isset($_POST['register']) && !empty($_POST['newusername']) 
                && !empty($_POST['newpassword'])) {
             
                //logic for querying sql to see
                //if username already exists
-               if ($_POST['newusername'] == 'thacker') 
-               {
-                  echo "Error: Username already exists.";
-               }
-               else {
-                  //save the new info to the user database
-                  $_SESSION['valid'] = True;
-                  $_SESSION['timeout'] = time();
-                  $_SESSION['username'] = $_POST['newusername'];
-                  header("location: index.php");
-                  exit();
+                  try {
+                        $username = htmlspecialchars($_POST["newusername"]);
+                        $password = htmlspecialchars($_POST["newpassword"]);
+                        $sql = "INSERT INTO User (userName, password, isAdmin) VALUES ('$username', '$password', 0)";
+                        $conn->exec($sql);
+            
+                        echo "Account successfully created!";
+
+                        //save the new info to the user database
+                        $_SESSION['valid'] = True;
+                        $_SESSION['timeout'] = time();
+                        $_SESSION['username'] = $_POST['newusername'];
+                     }
+         
+               catch (PDOException $e){
+               echo "Error: Username already exists";
                }
             }
          ?>
