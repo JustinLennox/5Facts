@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 26, 2016 at 02:41 AM
+-- Generation Time: Apr 26, 2016 at 09:49 PM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.6.19
 
@@ -33,11 +33,11 @@ CREATE TABLE `Event` (
   `factThree` text NOT NULL,
   `factFour` text NOT NULL,
   `factFive` text NOT NULL,
-  `voteOne` int(3) NOT NULL DEFAULT '0',
-  `voteTwo` int(3) NOT NULL DEFAULT '0',
-  `voteThree` int(3) NOT NULL DEFAULT '0',
-  `voteFour` int(3) NOT NULL DEFAULT '0',
-  `voteFive` int(3) NOT NULL DEFAULT '0',
+  `vote1` int(3) NOT NULL DEFAULT '0',
+  `vote2` int(3) NOT NULL DEFAULT '0',
+  `vote3` int(3) NOT NULL DEFAULT '0',
+  `vote4` int(3) NOT NULL DEFAULT '0',
+  `vote5` int(3) NOT NULL DEFAULT '0',
   `linkOne` varchar(50) NOT NULL,
   `linkTwo` varchar(50) DEFAULT NULL,
   `linkThree` varchar(50) DEFAULT NULL,
@@ -49,8 +49,9 @@ CREATE TABLE `Event` (
 -- Dumping data for table `Event`
 --
 
-INSERT INTO `Event` (`name`, `factOne`, `factTwo`, `factThree`, `factFour`, `factFive`, `voteOne`, `voteTwo`, `voteThree`, `voteFour`, `voteFive`, `linkOne`, `linkTwo`, `linkThree`, `picture`, `userCreated`) VALUES
-('G Day', 'Ludacris Performed', 'There were over 100,000 people in attendance', 'It occurred on 4/16/16', 'Neal Raines did not attend', 'Jacob Eason premiered as the black team''s Quarterback ', 5, 4, 2, 1, 3, 'http://www.georgiadogs.com/gday/', NULL, NULL, '', 'Neal Raines');
+INSERT INTO `Event` (`name`, `factOne`, `factTwo`, `factThree`, `factFour`, `factFive`, `vote1`, `vote2`, `vote3`, `vote4`, `vote5`, `linkOne`, `linkTwo`, `linkThree`, `picture`, `userCreated`) VALUES
+('G Day', 'Ludacris performed as the pregame entertainment', 'There were over 100,000 people in attendance', 'Jacob Eason premiered as the black teams Quarterback', 'It occurred on 4/16/16', 'The game was streamed on ESPNU', 5, 4, 3, 2, 1, 'http://www.georgiadogs.com/gday/', NULL, NULL, '', 'Neal Raines'),
+('Prince', 'Inducted into the Rock and Roll Hall of Fame in 2004', 'Died April 21st, 2016', 'Birthname was Prince Rogers Nelson', 'A master architect of funk, rock, R&amp;B and pop music', 'Won seven Grammy Awards, a Golden Globe Award, and an Academy Award', 7, 4, 3, 1, 0, 'https://en.wikipedia.org/wiki/Prince_%28musician%2', NULL, NULL, '', 'admin');
 
 -- --------------------------------------------------------
 
