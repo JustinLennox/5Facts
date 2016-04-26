@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 22, 2016 at 08:05 PM
+-- Generation Time: Apr 26, 2016 at 02:41 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.6.19
 
@@ -33,11 +33,11 @@ CREATE TABLE `Event` (
   `factThree` text NOT NULL,
   `factFour` text NOT NULL,
   `factFive` text NOT NULL,
-  `voteOne` int(3) NOT NULL,
-  `voteTwo` int(3) NOT NULL,
-  `voteThree` int(3) NOT NULL,
-  `voteFour` int(3) NOT NULL,
-  `voteFive` int(3) NOT NULL,
+  `voteOne` int(3) NOT NULL DEFAULT '0',
+  `voteTwo` int(3) NOT NULL DEFAULT '0',
+  `voteThree` int(3) NOT NULL DEFAULT '0',
+  `voteFour` int(3) NOT NULL DEFAULT '0',
+  `voteFive` int(3) NOT NULL DEFAULT '0',
   `linkOne` varchar(50) NOT NULL,
   `linkTwo` varchar(50) DEFAULT NULL,
   `linkThree` varchar(50) DEFAULT NULL,
