@@ -65,8 +65,7 @@
 				$factFive = $table['factFive'];
 				
 				//orders 
-				for($i=1; $i<6; $i++){
-					for($j=1; $j<6; $j++){
+				for($i=1; $i<7; $i++){
 						if($vote2 > $vote1){
 							$tempVote = $vote1;
 							$tempFact = $factOne;
@@ -80,6 +79,11 @@
 							    {
 							    echo $sql . "<br>" . $e->getMessage();
 							    }
+								$vote1 = $vote2;
+								$vote2 = $tempVote;
+								$factOne = $factTwo;
+								$factTwo = $tempFact;
+						
 						}
 						if($vote3 > $vote2){
 							$tempVote = $vote2;
@@ -94,6 +98,10 @@
 							    {
 							    echo $sql . "<br>" . $e->getMessage();
 							    }
+								$vote2 = $vote3;
+								$vote3 = $tempVote;
+								$factTwo = $factThree;
+								$factThree = $tempFact;
 						}
 						if($vote4 > $vote3){
 							$tempVote = $vote3;
@@ -108,6 +116,10 @@
 							    {
 							    echo $sql . "<br>" . $e->getMessage();
 							    }
+								$vote3 = $vote4;
+								$vote4 = $tempVote;
+								$factThree = $factFour;
+								$factFour = $tempFact;
 						}
 						if($vote5 > $vote4){
 							$tempVote = $vote4;
@@ -122,8 +134,12 @@
 							    {
 							    echo $sql . "<br>" . $e->getMessage();
 							    }
+								$vote4 = $vote5;
+								$vote5 = $tempVote;
+								$factFour = $factFive;
+								$factFive = $tempFact;
 						}
-					}
+					
 				}
 			}
 			
@@ -137,7 +153,7 @@
 				echo "<tr><td>Fact 3: </td><td>" . $factThree . "</td><td>" . $vote3 . "</td></tr>";
 				echo "<tr><td>Fact 4: </td><td>" . $factFour . "</td><td>" . $vote4 . "</td></tr>";
 				echo "<tr><td>Fact 5: </td><td>" . $factFive . "</td><td>" . $vote5 . "</td></tr>";
-				echo "<tr><td>Additional Info: </td><td><a href=" . $table['linkOne'] . ">" . $table['linkOne'] ."</a></td><td></td></tr>";
+				echo "<tr><td>Additional Info: </td><td><a href=" . $table['linkOne'] . ">https://" . $table['linkOne'] ."</a></td><td></td></tr>";
  				$count++;
 			}	
 			echo "</table>";

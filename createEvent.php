@@ -24,6 +24,7 @@
 						<br><input name="Fact3" type="text" placeholder="Fact 3" /> 
 						<br><input name="Fact4" type="text" placeholder="Fact 4" /> 
 						<br><input name="Fact5" type="text" placeholder="Fact 5" /> 
+						<br><input name="url" type="text" placeholder="URL" /> 
 						<br><input type="submit" value="Submit new event" />
 				</fieldset>
 			</form>

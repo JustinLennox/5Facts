@@ -45,8 +45,9 @@
 				$factthree = htmlspecialchars($_POST["Fact3"]);
 				$factfour = htmlspecialchars($_POST["Fact4"]);
 				$factfive = htmlspecialchars($_POST["Fact5"]);
+				$url = htmlspecialchars($_POST["url"]);
 				$userCreated = $_SESSION['username'];
-				$sql = "INSERT INTO Event (name, factOne, factTwo, factThree, factFour, factFive, userCreated) VALUES ('$name', '$factone', '$facttwo', '$factthree', '$factfour', '$factfive', '$userCreated')";
+				$sql = "INSERT INTO Event (name, factOne, factTwo, factThree, factFour, factFive, linkOne, userCreated) VALUES ('$name', '$factone', '$facttwo', '$factthree', '$factfour', '$factfive', '$url', '$userCreated')";
 				$conn->exec($sql);
 				
 				echo "Event successfully created!";
