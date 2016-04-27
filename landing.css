@@ -14,7 +14,7 @@
     background: linear-gradient(to right, #3498db, #1abc9c); /* Standard syntax */
 }
 
-#header > img {
+#header > a {
     padding: 0.5em 0em 0em 3em;
 }
 

@@ -11,7 +11,7 @@
 		<div id="header">
 			<div id="login"> <a href="login.php">Login/Register</a></div>
 			<div id="logout"> <a href="logout.php">Logout</a></div>
-			<img src='5FactsLogo.png' height='50px' width='50px'/>
+			<a href="index.php"><img src='5FactsLogo.png' height='50px' width='50px'/></a>
         	<div id="headline"> FiveFacts </div>
         	<div id="tagline">Get the scoop on current events quick.</div>
     	</div>

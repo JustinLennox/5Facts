@@ -10,7 +10,7 @@
 
 		<div id="header">
 			<div id="logout"> <a href="logout.php" style="text-decoration: none;">Logout</a></div>
-			<img src='5FactsLogo.png' height='50px' width='50px'/>
+			<a href="index.php"><img src='5FactsLogo.png' height='50px' width='50px'/></a>
         	<div id="headline"> FiveFacts </div>
         	<div id="tagline">Get the scoop on current events quick.</div>
     	</div>
