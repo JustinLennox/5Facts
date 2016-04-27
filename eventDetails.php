@@ -45,7 +45,8 @@
 			$variable->execute();
 
 			//output results table
-			echo "<table> <tr><td></td><td><b>". htmlspecialchars($_POST["eventID"]) . "</b></td><td><b>Vote Count: </b></td></tr>";
+			$eventID=htmlspecialchars($_POST["eventID"]);
+			echo "<table> <tr><td></td><td><b>". $eventID . "</b></td><td><b>Vote Count: </b></td><td></td></tr>";
 				
 			$count = 1;
 			while($table = $variable->fetch( PDO::FETCH_ASSOC )){ 
@@ -148,15 +149,17 @@
 			$count = 1;
 			while($table = $variable->fetch( PDO::FETCH_ASSOC )){ 
 				
-				echo "<tr><td>Fact 1: </td><td>" . $factOne . "</td><td>" . $vote1 . "</td></tr>";
-				echo "<tr><td>Fact 2: </td><td>" . $factTwo . "</td><td>" . $vote2 . "</td></tr>";
-				echo "<tr><td>Fact 3: </td><td>" . $factThree . "</td><td>" . $vote3 . "</td></tr>";
-				echo "<tr><td>Fact 4: </td><td>" . $factFour . "</td><td>" . $vote4 . "</td></tr>";
-				echo "<tr><td>Fact 5: </td><td>" . $factFive . "</td><td>" . $vote5 . "</td></tr>";
+				echo "<tr><td>Fact 1: </td><td>" . $factOne . "</td><td>" . $vote1 . "</td><td><form id='voteForm' action ='eventDetails.php' method='post'><select name='votes'><option value='5'>5</option><option value='4'>4</option><option value='3'>3</option><option value='2'>2</option><option value='1'>1</option></select></td></tr>";
+				echo "<tr><td>Fact 2: </td><td>" . $factTwo . "</td><td>" . $vote2 . "</td><td></td></tr>";
+				echo "<tr><td>Fact 3: </td><td>" . $factThree . "</td><td>" . $vote3 . "</td><td></tr>";
+				echo "<tr><td>Fact 4: </td><td>" . $factFour . "</td><td>" . $vote4 . "</td><td></tr>";
+				echo "<tr><td>Fact 5: </td><td>" . $factFive . "</td><td>" . $vote5 . "</td><td></td></tr>";
 				echo "<tr><td>Additional Info: </td><td><a href=" . $table['linkOne'] . ">https://" . $table['linkOne'] ."</a></td><td></td></tr>";
  				$count++;
 			}	
+			echo "<tr><td></td><td></td><td></td><td><input type='hidden' name='eventID' value='$eventID'/><input type='submit' value='Select'/></form></td></tr>";
 			echo "</table>";
+			echo htmlspecialchars($_POST["votes"]);
 			if($count == 1)
 			{
 				echo "No Results";	
