@@ -39,48 +39,125 @@
 			  echo "Connection failed: " . $e->getMessage();
     		  }
 		
-			//query
-			$variable = $conn->prepare("SELECT name FROM Event");
+			//query for names of events
+			$variable = $conn->prepare("SELECT name, factOne, factTwo, factThree, factFour, factFive FROM Event");
 			$variable->execute();
-
-			//output results table
-			//echo "<table> <tr> <td><b>Events related to search: </b>". 
-				//htmlspecialchars($_POST["search"]) . "</td></tr>";
 				
 			//create array for search
 			$searchResult = array();
-			$count = 1;
-			while($table = $variable->fetch( PDO::FETCH_ASSOC )){ 
-				$eventID = $table['name'];
 
-				//check if search matches the name of an event
-				//then list those first
-				//create list of words of search
-				$searchWords = explode(" ", $_POST["search"]);
+			//create list of words of the search
+			$searchWords = explode(" ", $_POST["search"]);
+
+			//create array of extraneous words
+			$extraneousSearch = array("the", "and", "or", "but", "a", "an", "g", "of");
+
+			//create relevance variable
+			$relevance = 50;
+
+			while($table = $variable->fetch( PDO::FETCH_ASSOC ))
+			{ 
 				for($i = 0; $i < count($searchWords); $i++)
 				{
-					if(strpos($table['name'], ucwords($searchWords[$i])) !== false)
+					//if name matches an event
+					//prioritize those first
+					if(strpos(strtolower($table['name']), strtolower($searchWords[$i])) !== false)
 					{
 						//check if it is already in the search results array
-						if(!in_array($table['name'], $searchResult))
+						if(!in_array(strtolower($searchWords[$i]), $extraneousSearch))
 						{
-							$searchResult[count($searchResult) - 1] = $table['name'];
+							if(!in_array($table['name'], $searchResult))
+							{
+								$searchResult[$table['name']] = $relevance;
+								$relevance--;
+							}
 						}
-						//echo "<tr><td>" . $table['name'];
 					}
-				}
-				//echo "<tr><td>" . $table['name'] . "<form id='eventForm' action ='eventDetails.php' method='post'><input type='hidden' name='eventID' value='$eventID'/><input type='hidden' name='votes' value=''/><input type='submit' value='Select'/></form></td></tr>";
-				
- 				$count++;
+					//increase relevance if search has part of fact 1
+					if(strpos(strtolower($table['factOne']), strtolower($searchWords[$i])) !== false)
+					{
+						if(!in_array(strtolower($searchWords[$i]), $extraneousSearch))
+						{
+							if(isset($searchResult[$table['name']]))
+							{
+								$searchResult[$table['name']] += 5;
+							}
+							else
+							{
+								$searchResult[$table['name']] = 5;
+							}
+						}
+					}
+					//increase relevance if search has part of fact 2
+					if(strpos(strtolower($table['factTwo']), strtolower($searchWords[$i])) !== false)
+					{
+						if(!in_array(strtolower($searchWords[$i]), $extraneousSearch))
+						{
+							if(isset($searchResult[$table['name']]))
+							{
+								$searchResult[$table['name']] += 5;
+							}
+							else
+							{
+								$searchResult[$table['name']] = 5;
+							}
+						}
+					}
+					//increase relevance if search has part of fact 3
+					if(strpos(strtolower($table['factThree']), strtolower($searchWords[$i])) !== false)
+					{
+						if(!in_array(strtolower($searchWords[$i]), $extraneousSearch))
+						{
+							if(isset($searchResult[$table['name']]))
+							{
+								$searchResult[$table['name']] += 5;
+							}
+							else
+							{
+								$searchResult[$table['name']] = 5;
+							}
+						}
+					}
+					//increase relevance if search has part of fact 4
+					if(strpos(strtolower($table['factFour']), strtolower($searchWords[$i])) !== false)
+					{
+						if(!in_array(strtolower($searchWords[$i]), $extraneousSearch))
+						{
+							if(isset($searchResult[$table['name']]))
+							{
+								$searchResult[$table['name']] += 5;
+							}
+							else
+							{
+								$searchResult[$table['name']] = 5;
+							}
+						}
+					}
+					//increase relevance if search has part of fact 5
+					if(strpos(strtolower($table['factFive']), strtolower($searchWords[$i])) !== false)
+					{
+						if(!in_array(strtolower($searchWords[$i]), $extraneousSearch))
+						{
+							if(isset($searchResult[$table['name']]))
+							{
+								$searchResult[$table['name']] += 5;
+							}
+							else
+							{
+								$searchResult[$table['name']] = 5;
+							}
+						}
+					}
+				}				
 			}	
-			echo "</table>";
+		
+			//now sort the array by descending value
+			arsort($searchResult);
 
-			$count = 1;
 			echo "<table> <tr> <td><b>Events related to search: </b>". 
 				htmlspecialchars($_POST["search"]) . "</td></tr>";
 			foreach($searchResult as $x => $x_value){
-				echo "<tr><td>" . $x_value . "<form id='eventForm' action ='eventDetails.php' method='post'><input type='hidden' name='eventID' value='$eventID'/><input type='hidden' name='votes' value=''/><input type='submit' value='Select'/></form></td></tr>";
-				$count++;
+				echo "<tr><td>" . $x . "<br>" . $x_value . "<form id='eventForm' action ='eventDetails.php' method='post'><input type='hidden' name='eventID' value='$x'/><input type='hidden' name='votes' value=''/><input type='submit' value='Select'/></form></td></tr>";
 			}
 			echo "</table>";
 

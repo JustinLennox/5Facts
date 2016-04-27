@@ -26,6 +26,10 @@
     font-weight: 200;
 }
 
+a:link{
+    text-decoration: none;
+}
+
 #login , #logout{
     float: right;
     font-size: 15pt;
