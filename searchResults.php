@@ -53,7 +53,7 @@
 			$extraneousSearch = array("the", "and", "or", "but", "a", "an", "g", "of");
 
 			//create relevance variable
-			$relevance = 50;
+			$relevance = 55;
 
 			while($table = $variable->fetch( PDO::FETCH_ASSOC ))
 			{ 
@@ -66,7 +66,7 @@
 						//check if it is already in the search results array
 						if(!in_array(strtolower($searchWords[$i]), $extraneousSearch))
 						{
-							if(!in_array($table['name'], $searchResult))
+							if(!array_key_exists($table['name'], $searchResult))
 							{
 								$searchResult[$table['name']] = $relevance;
 								$relevance--;
@@ -80,11 +80,11 @@
 						{
 							if(isset($searchResult[$table['name']]))
 							{
-								$searchResult[$table['name']] += 5;
+								$searchResult[$table['name']] += 2;
 							}
 							else
 							{
-								$searchResult[$table['name']] = 5;
+								$searchResult[$table['name']] = 2;
 							}
 						}
 					}
@@ -95,11 +95,11 @@
 						{
 							if(isset($searchResult[$table['name']]))
 							{
-								$searchResult[$table['name']] += 5;
+								$searchResult[$table['name']] += 2;
 							}
 							else
 							{
-								$searchResult[$table['name']] = 5;
+								$searchResult[$table['name']] = 2;
 							}
 						}
 					}
@@ -110,11 +110,11 @@
 						{
 							if(isset($searchResult[$table['name']]))
 							{
-								$searchResult[$table['name']] += 5;
+								$searchResult[$table['name']] += 2;
 							}
 							else
 							{
-								$searchResult[$table['name']] = 5;
+								$searchResult[$table['name']] = 2;
 							}
 						}
 					}
@@ -125,11 +125,11 @@
 						{
 							if(isset($searchResult[$table['name']]))
 							{
-								$searchResult[$table['name']] += 5;
+								$searchResult[$table['name']] += 2;
 							}
 							else
 							{
-								$searchResult[$table['name']] = 5;
+								$searchResult[$table['name']] = 2;
 							}
 						}
 					}
@@ -140,11 +140,11 @@
 						{
 							if(isset($searchResult[$table['name']]))
 							{
-								$searchResult[$table['name']] += 5;
+								$searchResult[$table['name']] += 2;
 							}
 							else
 							{
-								$searchResult[$table['name']] = 5;
+								$searchResult[$table['name']] = 2;
 							}
 						}
 					}
@@ -157,7 +157,7 @@
 			echo "<table> <tr> <td><b>Events related to search: </b>". 
 				htmlspecialchars($_POST["search"]) . "</td></tr>";
 			foreach($searchResult as $x => $x_value){
-				echo "<tr><td>" . $x . "<br>" . $x_value . "<form id='eventForm' action ='eventDetails.php' method='post'><input type='hidden' name='eventID' value='$x'/><input type='hidden' name='votes' value=''/><input type='submit' value='Select'/></form></td></tr>";
+				echo "<tr><td>" . $x . "  " . min(round(($x_value / 68) * 100, 1), 95) . "% Relevance<form id='eventForm' action ='eventDetails.php' method='post'><input type='hidden' name='eventID' value='$x'/><input type='hidden' name='votes' value=''/><input type='submit' value='Select'/></form></td></tr>";
 			}
 			echo "</table>";
 
