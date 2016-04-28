@@ -1,0 +1,65 @@
+.event {
+	background-color: white;
+	margin-top: 1em;
+	width: 720px;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+#eventTitle {
+	border-bottom: 5px solid #F2F6F9;
+	height: 60px;
+	background-color: #3498db;
+}
+
+#eventTitle > p {
+	margin: auto;
+	color: white;
+	height: 60px;
+	text-align: center;
+	line-height: 60px;
+	font-size: 22pt;
+}
+
+.fact {
+	width: 80%;
+	display: inline-block;
+}
+
+#SelectForm{
+	display: inline-block;
+}
+
+ol {
+	border-bottom: 1px solid #E8ECF0;
+	padding-bottom: 1em;
+	list-style-type: none;
+}
+
+li::before {
+  content: counter(step-counter);
+  margin-right: 5px;
+  font-size: 80%;
+  background-color: #3498db;
+  color: white;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 3px;
+}
+
+li {
+	border-radius: 5px;
+	counter-increment: step-counter;
+	font-size: 14pt;
+	margin: 5px 0px 5px 0px;
+}
+
+#AdditionalInfo {
+	text-align: center;
+}
+
+#AdditionalInfo > a {
+	color: #3498db;
+}
