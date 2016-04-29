@@ -157,7 +157,10 @@
 			echo "<table> <tr> <td><b>Events related to search: </b>". 
 				htmlspecialchars($_POST["search"]) . "</td></tr>";
 			foreach($searchResult as $x => $x_value){
-				echo "<tr><td>" . $x . "  " . min(round(($x_value / 68) * 100, 1), 95) . "% Relevance<form id='eventForm' action ='eventDetails.php' method='post'><input type='hidden' name='eventID' value='$x'/><input type='hidden' name='votes' value=''/><input type='submit' value='Select'/></form></td></tr>";
+				echo "<tr><td>" . $x . "  " . min(round(($x_value / 68) * 100, 1), 95) . "% Relevance";
+				echo "<form id='eventForm' action ='eventDetails.php' method='post'>";
+				echo "<input type='hidden' name='eventID' value='$x'/>";
+				echo "<input type='submit' value='Select'/></form></td></tr>";
 			}
 			echo "</table>";
 

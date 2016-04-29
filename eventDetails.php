@@ -1,5 +1,12 @@
 <?php
 	session_start();
+	if(isset($_GET["eventID"])){
+		$eventID=htmlspecialchars($_GET["eventID"]);
+	
+	} else{
+		$eventID=htmlspecialchars($_POST["eventID"]);
+	}
+	
 ?>	
 	<head>
 		<title>5Facts.com</title>
@@ -15,6 +22,7 @@
 			});
   		</script>
   		<script>	//This is the script we use for getting the indexs when the user sorts
+			var eventID = "<?php echo $eventID ?>";
 			$(document).ready(function() {
   				$('#sortable').sortable({
 				    start: function(e, ui) {
@@ -26,12 +34,23 @@
 				        // gets the new and old index then removes the temporary attribute
 				        var newIndex = ui.item.index();	//The place we've moved it to
 				        var oldIndex = $(this).attr('data-previndex');	//The previous position it was at
+						
 				        $(this).removeAttr('data-previndex');
 				        //UI.ITEM.INDEX HERE IS THE FACT'S ENDING INDEX AFTER THE USER MOVES IT
+						var link = "eventDetails.php?newIndex=";
+						link = link.concat(newIndex);
+						link = link.concat("&oldIndex=");
+						link = link.concat(oldIndex);
+						link = link.concat("&eventID=");
+						link = link.concat(eventID);
+						window.location.href=link;
 				    }
+					
 				});
   			});
+			
   		</script>
+		
 	</head>
 	<body>
 
@@ -48,7 +67,7 @@
   			<input id='SearchBar' type="text" name="search" placeholder='Search for something like GOP Debate or UGA G Day'  style='text-indent:40px;'/>
 		</form>
 
-		<?php 
+		<?php 		
 		 
 			//server details
 			$servername = "localhost";
@@ -68,17 +87,37 @@
 			  echo "Connection failed: " . $e->getMessage();
     		 }
 		
+			 //vote logic
+			if(isset($_GET["eventID"])){
+				$fact = $_GET["oldIndex"] + 1;
+				$fact = (string) "vote" . $fact;
+				$vote = 4 - $_GET["newIndex"];
+				
+				$variable = $conn->prepare('SELECT * FROM Event WHERE name = \'' . $eventID . '\'');
+				$variable->execute();
+				while($table = $variable->fetch( PDO::FETCH_ASSOC )){ 
+					$newVote = $table[$fact] + $vote;
+					try {
+					    $sql = 'UPDATE Event SET ' . $fact . ' = \'' . $newVote . '\' WHERE name = \'' . $eventID . '\'';
+					    $stmt = $conn->prepare($sql);
+					    $stmt->execute();
+					    }
+					catch(PDOException $e)
+					    {
+					    echo $sql . "<br>" . $e->getMessage();
+					    }
+				}
+				
+			}
+			
 			//query
-			$event = htmlspecialchars($_POST['eventID']);
-			$variable = $conn->prepare('SELECT * FROM Event WHERE name = \'' . $event . '\'');
+			$variable = $conn->prepare('SELECT * FROM Event WHERE name = \'' . $eventID . '\'');
 			$variable->execute();
-
-			//output results table
-			$eventID=htmlspecialchars($_POST["eventID"]);
+			
 			echo "<div class='event'><div id='eventTitle'><p>". $eventID . "</p></div>";
 				
 			$count = 1;
-			while($table = $variable->fetch( PDO::FETCH_ASSOC )){ 
+			while($table = $variable->fetch( PDO::FETCH_ASSOC )){ 				
 				
 				//initialize vote variables
 				$vote1 = $table['vote1'];
@@ -101,7 +140,7 @@
 							$tempFact = $factOne;
 							
 							try {
-							    $sql = 'UPDATE Event SET factOne = \'' . $factTwo . '\', factTwo= \'' . $tempFact . '\', vote1= \'' . $vote2 . '\',vote2= \'' . $tempVote . '\'WHERE name = \'' . $event . '\'';
+							    $sql = 'UPDATE Event SET factOne = \'' . $factTwo . '\', factTwo= \'' . $tempFact . '\', vote1= \'' . $vote2 . '\',vote2= \'' . $tempVote . '\'WHERE name = \'' . $eventID . '\'';
 							    $stmt = $conn->prepare($sql);
 							    $stmt->execute();
 							    }
@@ -120,7 +159,7 @@
 							$tempFact = $factTwo;
 							
 							try {
-							    $sql = 'UPDATE Event SET factTwo = \'' . $factThree . '\', factThree= \'' . $tempFact . '\', vote2= \'' . $vote3 . '\',vote3= \'' . $tempVote . '\'WHERE name = \'' . $event . '\'';
+							    $sql = 'UPDATE Event SET factTwo = \'' . $factThree . '\', factThree= \'' . $tempFact . '\', vote2= \'' . $vote3 . '\',vote3= \'' . $tempVote . '\'WHERE name = \'' . $eventID . '\'';
 							    $stmt = $conn->prepare($sql);
 							    $stmt->execute();
 							    }
@@ -138,7 +177,7 @@
 							$tempFact = $factThree;
 							
 							try {
-							    $sql = 'UPDATE Event SET factThree = \'' . $factFour . '\', factFour= \'' . $tempFact . '\', vote3= \'' . $vote4 . '\',vote4= \'' . $tempVote . '\'WHERE name = \'' . $event . '\'';
+							    $sql = 'UPDATE Event SET factThree = \'' . $factFour . '\', factFour= \'' . $tempFact . '\', vote3= \'' . $vote4 . '\',vote4= \'' . $tempVote . '\'WHERE name = \'' . $eventID . '\'';
 							    $stmt = $conn->prepare($sql);
 							    $stmt->execute();
 							    }
@@ -156,7 +195,7 @@
 							$tempFact = $factFour;
 							
 							try {
-							    $sql = 'UPDATE Event SET factFour = \'' . $factFive . '\', factFive= \'' . $tempFact . '\', vote4= \'' . $vote5 . '\',vote5= \'' . $tempVote . '\'WHERE name = \'' . $event . '\'';
+							    $sql = 'UPDATE Event SET factFour = \'' . $factFive . '\', factFive= \'' . $tempFact . '\', vote4= \'' . $vote5 . '\',vote5= \'' . $tempVote . '\'WHERE name = \'' . $eventID . '\'';
 							    $stmt = $conn->prepare($sql);
 							    $stmt->execute();
 							    }
@@ -173,7 +212,7 @@
 				}
 			}
 			
-			$variable = $conn->prepare('SELECT * FROM Event WHERE name = \'' . $event . '\'');
+			$variable = $conn->prepare('SELECT * FROM Event WHERE name = \'' . $eventID . '\'');
 			$variable->execute();
 			$count = 1;
 			while($table = $variable->fetch( PDO::FETCH_ASSOC )){ 
@@ -185,11 +224,14 @@
 				echo "<li>" . $factFive . "</li></ol>";
 				echo "<p id='AdditionalInfo'>Additional Info: <a href=" . $table['linkOne'] . ">https://" . $table['linkOne'] ."</a><p>";
  				$count++;
-			}
 
-			//What's this?
-			echo "<tr><td></td><td></td><td></td><td><input type='hidden' name='eventID' value='$eventID'/>";
-			echo htmlspecialchars($_POST["votes"]);
+		}
+		
+		echo "Drag facts to cast your vote!<br>";
+		if(isset($_GET["newIndex"])){
+			echo "Vote Cast!";
+		}
+		
 			if($count == 1)
 			{
 				echo "No Results";	
