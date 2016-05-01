@@ -50,7 +50,7 @@
 				$sql = "INSERT INTO Event (name, factOne, factTwo, factThree, factFour, factFive, linkOne, userCreated) VALUES ('$name', '$factone', '$facttwo', '$factthree', '$factfour', '$factfive', '$url', '$userCreated')";
 				$conn->exec($sql);
 				
-				echo "Event successfully created!";
+				echo "Event successfully created!<br>";
 			}
 			
 			catch (PDOException $e){

@@ -222,12 +222,12 @@
 				echo "<li>" . $factThree . "</li>";
 				echo "<li>" . $factFour . "</li>";
 				echo "<li>" . $factFive . "</li></ol>";
-				echo "<p id='AdditionalInfo'>Additional Info: <a href=" . $table['linkOne'] . ">https://" . $table['linkOne'] ."</a><p>";
+				echo "<p id='AdditionalInfo'>Additional Info: <a href=" . $table['linkOne'] . ">" . $table['linkOne'] ."</a><p>";
  				$count++;
 
 		}
 		
-		echo "Drag facts to cast your vote!<br>";
+		echo "<p id='AdditionalInfo'>Drag facts to cast your vote!<p>";
 		if(isset($_GET["newIndex"])){
 			echo "Vote Cast!";
 		}
@@ -241,7 +241,7 @@
 	
 		if(isset($_SESSION['valid']))
 		{
-			echo "Currently logged in as " . $_SESSION['username'];
+			echo "<p id='AdditionalInfo'>Currently logged in as " . $_SESSION['username'] . "<p>";
 		}
 		?>
 	</body>

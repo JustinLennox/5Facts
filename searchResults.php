@@ -40,7 +40,7 @@
     		  }
 		
 			//query for names of events
-			$variable = $conn->prepare("SELECT name, factOne, factTwo, factThree, factFour, factFive FROM Event");
+			$variable = $conn->prepare("SELECT name, factOne, factTwo, factThree, factFour, factFive, userCreated FROM Event");
 			$variable->execute();
 				
 			//create array for search
@@ -50,7 +50,7 @@
 			$searchWords = explode(" ", $_POST["search"]);
 
 			//create array of extraneous words
-			$extraneousSearch = array("the", "and", "or", "but", "a", "an", "g", "of");
+			$extraneousSearch = array("the", "and", "or", "but", "a", "an", "g", "of", "admin", "on", "in");
 
 			//create relevance variable
 			$relevance = 55;
@@ -71,8 +71,24 @@
 								$searchResult[$table['name']] = $relevance;
 								$relevance--;
 							}
+							else
+							{
+								$searchResult[$table['name']] += $relevance;
+								$relevance--;
+							}
 						}
 					}
+
+					//increase relevance if search has the user who submitted event
+					if(strpos(strtolower($table['userCreated']), strtolower($searchWords[$i])) !== false)
+					{
+						if(!array_key_exists($table['name'], $searchResult))
+						{
+							$searchResult[$table['name']] = $relevance;
+							$relevance--;
+						}
+					}
+
 					//increase relevance if search has part of fact 1
 					if(strpos(strtolower($table['factOne']), strtolower($searchWords[$i])) !== false)
 					{
@@ -155,7 +171,7 @@
 			arsort($searchResult);
 
 			echo "<table> <tr> <td><b>Events related to search: </b>". 
-				htmlspecialchars($_POST["search"]) . "</td></tr>";
+				htmlspecialchars(ucwords($_POST["search"]) ). "</td></tr>";
 			foreach($searchResult as $x => $x_value){
 				echo "<tr><td>" . $x . "  " . min(round(($x_value / 68) * 100, 1), 95) . "% Relevance";
 				echo "<form id='eventForm' action ='eventDetails.php' method='post'>";
@@ -167,7 +183,7 @@
 			//if there are no results
 			if(empty($searchResult))
 			{
-				echo "No Results<br><br>";	
+				echo "No Results.<br><br>";	
 			}
 			
 		
