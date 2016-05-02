@@ -12,7 +12,13 @@
       <title>Login and Register!</title>
       <link rel="stylesheet" type="text/css" href="landing.css">
       <link rel="stylesheet" type="text/css" href="login.css">
-      
+      <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+      <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+      <script>
+          $(function() {
+            $( "#dialog" ).dialog();
+         });
+      </script>
    </head>
 	
    <body>
@@ -78,7 +84,7 @@
                }
                else
                {
-                  echo "Incorrect username or password";
+                  echo "<div id='dialog' title=''>Sorry, we do not have a user with that username and password.</div>";
                }
             }
          }
@@ -94,7 +100,7 @@
                         $sql = "INSERT INTO User (userName, password, isAdmin) VALUES ('$username', '$password', 0)";
                         $conn->exec($sql);
             
-                        echo "Account successfully created!";
+                        echo "<div id='dialog' title=''>Account successfully created!</div>";
 
                         //save the new info to the user database
                         $_SESSION['valid'] = True;
@@ -103,7 +109,7 @@
                      }
          
                catch (PDOException $e){
-               echo "Error: Username already exists";
+               echo "<div id='dialog' title=''>Sorry, this username already exists.</div>";
                }
             }
          ?>

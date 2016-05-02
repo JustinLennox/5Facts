@@ -12,6 +12,7 @@
 		<title>5Facts.com</title>
 		<link rel="stylesheet" type="text/css" href="landing.css">
 		<link rel="stylesheet" type="text/css" href="event.css">
+		<link rel="stylesheet" type="text/css" href="login.css">
 		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
  		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>		
 		<!-- A script for sorting the facts -->
@@ -56,8 +57,15 @@
 
 
 		<div id="header">
-			<div id="login"> <a href="login.php">Login/Register</a></div>
-			<div id="logout"> <a href="logout.php">Logout</a></div>
+			<?php 
+				if(isset($_SESSION['valid']))
+				{
+					echo "<div id='logout'><a href='logout.php' style='text-decoration: none;'>" . $_SESSION['username'] . " (Logout)";
+					echo "<br><a href='createEvent.php'> + Create Event</a></div>";
+				}else{
+					echo "<div id='login'><a href='login.php' style='text-decoration: none;'>Login/Register</a></div>";
+				}
+			?>
 			<a href="index.php"><img src='5FactsLogo.png' height='50px' width='50px'/></a>
         	<div id="headline"> FiveFacts </div>
         	<div id="tagline">Get the scoop on current events quick.</div>
@@ -227,22 +235,16 @@
 
 		}
 		
-		echo "<p id='AdditionalInfo'>Drag facts to cast your vote!<p>";
 		if(isset($_GET["newIndex"])){
-			echo "Vote Cast!";
+			echo "<p id='AdditionalInfo'>Vote Cast!</p>";
+		}else{
+			echo "<p id='AdditionalInfo'>Drag facts to cast your vote!<p>";
 		}
 		
 			if($count == 1)
 			{
 				echo "No Results";	
 			}
-			
-		
-	
-		if(isset($_SESSION['valid']))
-		{
-			echo "<p id='AdditionalInfo'>Currently logged in as " . $_SESSION['username'] . "<p>";
-		}
 		?>
 	</body>
 </html>

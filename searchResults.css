@@ -1,0 +1,60 @@
+#searchTable{
+	margin: 10px auto;
+	text-align: center;
+	width: 720px;
+}
+
+#searchPrompt {
+}
+
+#searchResult {
+	text-align: left;
+	margin-top: 30px;
+	height: 60px;
+	border: 5px solid #3498db;
+	border-radius: 5px;
+}
+
+#searchResult:hover > #relevanceTag{
+	background-color: #3498db;
+	color: white;
+}
+
+#searchResult:hover > #searchResultInput{
+	background-color: #F2F6F9;
+	color: #3498db;
+}
+
+#relevanceTag {
+	cursor: pointer;
+	width: 80px;
+	border: none;
+	height: 60px;
+	border-radius: 5px;
+	font-size: 16pt;
+	color: #3498db;
+	background-color: #F2F6F9;
+}
+
+#searchResultInput {
+	cursor: pointer;
+	width: 620;
+	border: none;
+	color: white;
+	border-radius: 5px;
+	text-align: left;
+	padding-left: 20px;
+	font-size: 18pt;
+	background-color: #3498db;
+	height: 60px;
+}
+
+#eventForm{
+	background-color: #3498db;
+	border-radius: 5px;
+}
+
+#noResultsForm{
+	background-color: #3498db;
+	border-radius: 5px;
+}

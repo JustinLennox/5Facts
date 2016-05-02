@@ -1,0 +1,61 @@
+#container {
+	margin: 40px auto;
+	width: 720px;
+	text-align: center;
+}
+
+fieldset {
+	border: none;
+}
+
+form {
+	border: none;
+}
+
+legend {
+	margin: auto;
+	background-color: white;
+	border: none;
+}
+
+#Name{
+	border: none;
+	border-bottom: 5px solid #F2F6F9;
+	height: 60px;
+	width: 720px;
+	color: white;
+	border-radius: 5px;
+	background-color: #3498db;
+	text-align: center;
+	font-size: 22pt;
+}
+
+#Fact{
+	border: none;
+	background-color: white;
+	width: 720px;
+	font-size: 14pt;
+	height: 50px;
+	margin-top: 10px;
+	padding-left: 10px;
+
+}
+
+#submission{
+	border: none;
+	border-top: 5px solid #F2F6F9;
+	height: 60px;
+	width: 720px;
+	color: white;
+	border-radius: 5px;
+	margin-top: 10px;
+	background-color: #3498db;
+	text-align: center;
+	font-size: 22pt;
+}
+
+#eventSuccess{
+	text-align: center;
+	margin-top: 30px;
+}
+

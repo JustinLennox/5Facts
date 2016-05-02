@@ -22,7 +22,7 @@
 	margin: 0 auto;
 }
 
-input {
+.form-signin > input {
 	border: 0px;
 	height: 38px;
 	margin-top: 20px;
@@ -32,7 +32,7 @@ input {
 	padding: 8px;
 }
 
-button {
+.form-signin > button {
 	cursor: pointer;
 	width: 400px;
 	border-radius: 5px;
@@ -43,4 +43,49 @@ button {
 	border: none;
 	background-color: #3498db;
 	color: white;
+}
+
+#dialog{
+	background-color: white;
+	border: 1px solid #3498db;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	text-align: center;
+	padding-left: 10px;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+    padding: 0.1em .5em;
+    position: relative;
+    padding: 10px;
+    text-align: center;
+    font-size: 1em;
+    background-color: #3498db;
+    color: white;
+    border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.ui-dialog .ui-dialog-titlebar > * {
+	border: none;
+	color: white;
+	font-size: 12pt;
+	background-color: #3498db;
+}
+
+.ui-dialog {
+    left: 0;
+    outline: 0 none;
+    padding: 0 !important;
+    position: absolute;
+    top: 0;
+}
+
+#logout > a , #login > a {
+	padding: 5px;
+}
+
+#logout > a:hover, #login > a:hover {
+	border: 1px solid white;
+	border-radius: 5px;
 }

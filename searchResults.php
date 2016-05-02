@@ -4,13 +4,22 @@
 	<head>
 		<title>5Facts.com</title>
 		<link rel="stylesheet" type="text/css" href="landing.css">
+		<link rel="stylesheet" type="text/css" href="login.css">
+		<link rel="stylesheet" type="text/css" href="searchResults.css">
 	</head>
 	<body>
 
 
 		<div id="header">
-			<div id="login"> <a href="login.php">Login/Register</a></div>
-			<div id="logout"> <a href="logout.php">Logout</a></div>
+			<?php 
+				if(isset($_SESSION['valid']))
+				{
+					echo "<div id='logout'><a href='logout.php' style='text-decoration: none;'>" . $_SESSION['username'] . " (Logout)";
+					echo "<br><a href='createEvent.php'> + Create Event</a></div>";
+				}else{
+					echo "<div id='login'><a href='login.php' style='text-decoration: none;'>Login/Register</a></div>";
+				}
+			?>
 			<a href="index.php"><img src='5FactsLogo.png' height='50px' width='50px'/></a>
         	<div id="headline"> FiveFacts </div>
         	<div id="tagline">Get the scoop on current events quick.</div>
@@ -170,28 +179,21 @@
 			//now sort the array by descending value
 			arsort($searchResult);
 
-			echo "<table> <tr> <td><b>Events related to search: </b>". 
-				htmlspecialchars(ucwords($_POST["search"]) ). "</td></tr>";
+			echo "<div id='searchTable'> <b>Events related to search: </b>". 
+				htmlspecialchars(ucwords($_POST["search"]) );
 			foreach($searchResult as $x => $x_value){
-				echo "<tr><td>" . $x . "  " . min(round(($x_value / 68) * 100, 1), 95) . "% Relevance";
 				echo "<form id='eventForm' action ='eventDetails.php' method='post'>";
-				echo "<input type='hidden' name='eventID' value='$x'/>";
-				echo "<input type='submit' value='Select'/></form></td></tr>";
+				echo "<div id='searchResult'> <input type='submit' id='relevanceTag' value='" . min(round(($x_value / 68) * 100, 1), 95) . "%'/>";
+				echo  "<input type='submit' id='searchResultInput' value='". $x . "'/>";
+				echo "<input type='hidden' name='eventID' value='$x'/></div></form>";
 			}
-			echo "</table>";
-
 			//if there are no results
 			if(empty($searchResult))
 			{
-				echo "No Results.<br><br>";	
+				echo "<div id='searchTable'><form id='noResultsForm' action=''>"; 
+				echo "<div id='searchResult'> <input type='submit' id='relevanceTag' value='0%' disabled/>";
+				echo  "<input type='submit' id='searchResultInput' value='No Results :(' disabled/></div></div></form>";
 			}
-			
-		
-	
-		if(isset($_SESSION['valid']))
-		{
-			echo "Currently logged in as " . $_SESSION['username'];
-		}
 		?>
 		
 	</body>
