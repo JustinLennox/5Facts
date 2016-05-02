@@ -30,9 +30,11 @@ a:link{
     text-decoration: none;
 }
 
-#login , #logout{
+#login > *, #logout > * {
     float: right;
-    font-size: 15pt;
+    color: white;
+    font-size: 12pt;
+    font-weight: 200;
     text-align: right;
     margin-right: 20px;
     margin-top: 10px;

@@ -1,0 +1,46 @@
+*{
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.signin {
+	width: 720px;
+	height: 720px;
+	margin: auto;
+}
+
+.signin > p {
+	text-align: center;
+	margin-top: 44px;
+	font-size: 20pt;
+	font-weight: 200;
+	margin-bottom: 10px
+}
+
+.signin > form {
+	text-align: center;
+	width: 50%;
+	margin: 0 auto;
+}
+
+input {
+	border: 0px;
+	height: 38px;
+	margin-top: 20px;
+	border-radius: 5px;
+	width: 400px;
+	font-size: 12pt;
+	padding: 8px;
+}
+
+button {
+	cursor: pointer;
+	width: 400px;
+	border-radius: 5px;
+	height: 38px;
+	margin-top: 20px;
+	font-size: 12pt;
+	font-weight: 250;
+	border: none;
+	background-color: #3498db;
+	color: white;
+}

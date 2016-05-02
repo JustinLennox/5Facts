@@ -4,6 +4,7 @@
 	<head>
 		<title>5Facts.com</title>
 		<link rel="stylesheet" type="text/css" href="landing.css">
+		<link rel='shortcut icon' href='favicon.ico' type='image/x-icon'/ >
 	</head>
 	<body>
 

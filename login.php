@@ -11,6 +11,7 @@
    <head>
       <title>Login and Register!</title>
       <link rel="stylesheet" type="text/css" href="landing.css">
+      <link rel="stylesheet" type="text/css" href="login.css">
       
    </head>
 	
@@ -109,29 +110,29 @@
       </div> <!-- /container -->
 
       <div class = "signin">
-         <p>Existing member? Sign in here:</p>
+         <p>Existing member? Sign in here.</p>
          <form class = "form-signin" role = "form" 
             action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']); 
             ?>" method = "post">
             <h4 class = "form-signin-heading"><?php echo $msg; ?></h4>
             <input type = "text" class = "form-control" 
-               name = "username" placeholder = "username" 
-               required autofocus></br>
+               name = "username" placeholder = "Username" 
+               required autofocus/></br>
             <input type = "password" class = "form-control"
-               name = "password" placeholder = "password" required>
+               name = "password" placeholder = "Password" required /><br/>
             <button class = "btn btn-lg btn-primary btn-block" type = "submit" 
                name = "login">Login</button>
          </form>
          
-         <p>Register new account here:</p>
+         <p>Or register a new account.</p>
          <form class = "form-signin" role = "form" 
             action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']); 
             ?>" method = "post">
             <h4 class = "form-signin-heading"><?php echo $msg; ?></h4>
             <input type = "text" class = "form-control" 
-               name = "newusername" placeholder = "username" ></br>
+               name = "newusername" placeholder = "Username" ></br>
             <input type = "password" class = "form-control"
-               name = "newpassword" placeholder = "password" required>
+               name = "newpassword" placeholder = "Password" required><br />
             <button class = "btn btn-lg btn-primary btn-block" type = "submit" 
                name = "register">Register</button>
          </form>
